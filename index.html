@@ -279,7 +279,8 @@
             arr.forEach((el) => {
                 const item = document.createElement('div');
 
-                item.innerHTML = `<div>${el.name && `<h3>${el.website && `<a href="${el.website}">`}${el.name}${el.website && `</a>`}</h3>`}<address>${el.street && `${el.street}`} ${el.city && `${el.city}`} ${el.state && `${el.state}`} ${el.zip && `${el.zip}`}</address></div>${el.phone && `<a href="tel:${el.phone}">${el.phone}</a>`}`;
+                console.log(el)
+                item.innerHTML = `<div>${el.name && `<h3>${el.website != null ? `<a href="${el.website}">` : ''}${el.name}${el.website != null ? `</a>` : ''}</h3>`}<address>${el.street != null ? `${el.street}` : ''} ${el.city != null ? `${el.city}` : ''} ${el.state != null ? `${el.state}` : ''} ${el.zip != null ? `${el.zip}` : ''}</address></div>${el.phone != null ? `<a href="tel:${el.phone}">${el.phone}</a>` : ''}`;
 
                 results.append(item);
             });
