@@ -253,18 +253,18 @@
 <script type="text/javascript">
     const results = document.querySelector('.results'),
             submitBtn = document.querySelector('button[type="submit"]');
-    const formSubmit = (e) => {
+    const formSubmit = async (e) => {
         e.preventDefault();
         submitBtn.classList.add('loading');
         submitBtn.innerHTML = "Loading...<i></i>";
 
-        fetch(`https://pinballmap.com/api/v1/locations/closest_by_lat_lon.json?lat=${document.querySelector('input[name="latitude"]').value}&lon=${document.querySelector('input[name="longitude"]').value}&send_all_within_distance=500`)
+        await fetch(`https://pinballmap.com/api/v1/locations/closest_by_lat_lon.json?lat=${document.querySelector('input[name="latitude"]').value}&lon=${document.querySelector('input[name="longitude"]').value}&send_all_within_distance=500`)
                 .then(response => response.json())
                 .then(data => {
                     submitBtn.classList.remove('loading');
                     submitBtn.innerHTML = "Search"
                     addList(data.locations)
-                })
+                }).catch(error => results.innerHTML = '<p>Something went wrong. Please try again.</p>');
     }
     const addList = (arr) => {
         results.innerHTML = '';
